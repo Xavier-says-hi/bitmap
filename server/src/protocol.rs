@@ -18,6 +18,7 @@ pub enum MessageType {
     ToggleBit = 0x13,
     PartialStateSubscription = 0x14,
     PartialStateUnsubscription = 0x15,
+    SetBit = 0x16,
 }
 
 impl MessageType {
@@ -28,6 +29,7 @@ impl MessageType {
                 | MessageType::ToggleBit
                 | MessageType::PartialStateSubscription
                 | MessageType::PartialStateUnsubscription
+                | MessageType::SetBit
         )
     }
 
@@ -83,6 +85,13 @@ pub struct PartialStateUpdateMessage {
 #[derive(Debug, Clone, FromBytes, FromZeroes, AsBytes, Unaligned)]
 pub struct ToggleBitMessage {
     pub index: u32,
+}
+
+#[repr(packed)]
+#[derive(Debug, Clone, FromBytes, FromZeroes, AsBytes, Unaligned)]
+pub struct SetBitMessage {
+    pub index: u32,
+    pub value: bool,
 }
 
 #[repr(packed)]
